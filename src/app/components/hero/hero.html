@@ -1,0 +1,54 @@
+<section
+  id="hero"
+  class="ux-section-shell min-h-screen flex flex-col items-center justify-center px-6"
+>
+  <div class="ux-section-bg ux-bg-hero" aria-hidden="true"></div>
+  <div
+    class="ux-animate-orb-tr absolute -top-32 -right-32 w-[28rem] h-[28rem] rounded-full bg-accent/15 blur-3xl pointer-events-none z-[1] dark:bg-accent/25"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="ux-animate-orb-bl absolute -bottom-32 -left-32 w-[32rem] h-[32rem] rounded-full bg-accent/12 blur-3xl pointer-events-none z-[1] dark:bg-accent/20"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="ux-animate-shimmer absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(90vw,52rem)] h-[min(70vh,28rem)] rounded-[40%] bg-gradient-to-br from-accent/8 via-transparent to-accent-hover/10 blur-3xl pointer-events-none z-0 dark:from-accent/15 dark:to-accent-hover/15"
+    aria-hidden="true"
+  ></div>
+
+  <div class="ux-section-inner text-center max-w-3xl">
+    <p class="text-sm font-mono text-accent tracking-widest uppercase mb-4">
+      Hello, I'm
+    </p>
+    <h1 class="text-5xl md:text-7xl font-bold text-primary leading-tight mb-4">
+      {{ profile.name }}
+    </h1>
+    <h2 class="text-2xl md:text-3xl font-light text-secondary mb-8">
+      {{ profile.title }}
+    </h2>
+    <p class="text-lg text-secondary max-w-xl mx-auto leading-relaxed">
+      {{ profile.tagline }}
+    </p>
+  </div>
+
+  <!-- Scroll indicator -->
+  <button
+    class="absolute bottom-12 z-10 cursor-pointer animate-bounce"
+    (click)="scrollToAbout()"
+    aria-label="Scroll to about section"
+  >
+    <svg
+      class="w-6 h-6 text-secondary"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+      />
+    </svg>
+  </button>
+</section>

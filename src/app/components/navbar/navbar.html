@@ -1,0 +1,125 @@
+<nav
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  [class.backdrop-blur-md]="isScrolled()"
+  [class.bg-surface/90]="isScrolled()"
+  [class.border-b]="isScrolled()"
+  [class.border-divider]="isScrolled()"
+  [class.shadow-sm]="isScrolled()"
+  [class.bg-transparent]="!isScrolled()"
+>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-18">
+      <button
+        class="text-xl font-semibold text-primary tracking-tight cursor-pointer"
+        (click)="navigateTo('hero')"
+      >
+        Senthil<span class="text-accent">.</span>
+      </button>
+
+      <div class="hidden md:flex items-center gap-6">
+        @for (link of navLinks; track link.section) {
+          <button
+            class="text-sm font-medium text-secondary hover:text-accent transition-colors duration-200 cursor-pointer"
+            (click)="navigateTo(link.section)"
+          >
+            {{ link.label }}
+          </button>
+        }
+        <button
+          type="button"
+          class="ml-2 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-divider bg-background/80 text-secondary transition-colors hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
+          (click)="toggleTheme()"
+          [attr.aria-label]="
+            theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'
+          "
+        >
+          @if (theme.isDark()) {
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+          } @else {
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+          }
+        </button>
+      </div>
+
+      <div class="flex items-center gap-2 md:hidden">
+        <button
+          type="button"
+          class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-divider bg-background/80 text-secondary transition-colors hover:border-accent/40 hover:bg-accent/10 hover:text-accent"
+          (click)="toggleTheme()"
+          [attr.aria-label]="
+            theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'
+          "
+        >
+          @if (theme.isDark()) {
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+          } @else {
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+          }
+        </button>
+        <button
+          class="flex flex-col gap-1.5 cursor-pointer p-2"
+          (click)="toggleMobileMenu()"
+          aria-label="Toggle menu"
+        >
+          <span
+            class="block w-6 h-0.5 bg-primary transition-all duration-300"
+            [class.rotate-45]="isMobileMenuOpen()"
+            [class.translate-y-2]="isMobileMenuOpen()"
+          ></span>
+          <span
+            class="block w-6 h-0.5 bg-primary transition-all duration-300"
+            [class.opacity-0]="isMobileMenuOpen()"
+          ></span>
+          <span
+            class="block w-6 h-0.5 bg-primary transition-all duration-300"
+            [class.-rotate-45]="isMobileMenuOpen()"
+            [class.-translate-y-2]="isMobileMenuOpen()"
+          ></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (isMobileMenuOpen()) {
+    <div class="md:hidden bg-surface/95 backdrop-blur-md border-t border-divider shadow-lg">
+      <div class="px-6 py-4 flex flex-col gap-4">
+        @for (link of navLinks; track link.section) {
+          <button
+            class="text-base font-medium text-secondary hover:text-accent transition-colors duration-200 text-left cursor-pointer"
+            (click)="navigateTo(link.section)"
+          >
+            {{ link.label }}
+          </button>
+        }
+      </div>
+    </div>
+  }
+</nav>

@@ -1,0 +1,145 @@
+<section id="about" class="ux-section-shell py-24 md:py-32 px-6 bg-background">
+  <div class="ux-section-bg ux-bg-about" aria-hidden="true"></div>
+  <div class="ux-section-inner max-w-6xl mx-auto">
+    <h2
+      appScrollAnimate
+      class="text-3xl md:text-4xl font-bold text-primary mb-16 text-center"
+    >
+      About Me
+    </h2>
+
+    <div class="grid md:grid-cols-2 gap-16 items-start">
+      <!-- Left: Summary + Experience -->
+      <div appScrollAnimate>
+        <p class="text-lg text-secondary leading-relaxed mb-8">
+          {{ profile.summary }}
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-6 mb-8">
+          <div class="bg-surface rounded-2xl p-6 shadow-sm border border-divider">
+            <p class="text-3xl font-bold text-accent">{{ profile.experience }}</p>
+            <p class="text-sm text-secondary mt-1">Years Experience</p>
+          </div>
+          <div class="bg-surface rounded-2xl p-6 shadow-sm border border-divider">
+            <p class="text-3xl font-bold text-accent">5+</p>
+            <p class="text-sm text-secondary mt-1">Projects Delivered</p>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="mb-8">
+          <h3 class="text-lg font-semibold text-primary mb-3">Certifications</h3>
+          @for (cert of profile.certifications; track cert) {
+            <p class="text-sm text-secondary mb-1">{{ cert }}</p>
+          }
+        </div>
+
+        <!-- Education -->
+        <div>
+          <h3 class="text-lg font-semibold text-primary mb-3">Education</h3>
+          <p class="text-sm text-secondary">{{ profile.education }}</p>
+        </div>
+      </div>
+
+      <!-- Right: Skills -->
+      <div appScrollAnimate animateDelay="200ms">
+        <!-- Design Skills -->
+        <div class="mb-8">
+          <h3 class="text-sm font-mono text-accent uppercase tracking-widest mb-4">
+            Design
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            @for (skill of designSkills; track skill.name) {
+              <span
+                class="px-4 py-2 bg-accent/5 text-accent text-sm font-medium rounded-full border border-accent/10"
+              >
+                {{ skill.name }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <!-- Tools -->
+        <div class="mb-8">
+          <h3 class="text-sm font-mono text-accent uppercase tracking-widest mb-4">
+            Tools
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            @for (skill of toolSkills; track skill.name) {
+              <span
+                class="px-4 py-2 bg-accent/5 text-accent text-sm font-medium rounded-full border border-accent/10"
+              >
+                {{ skill.name }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <!-- Development -->
+        <div class="mb-8">
+          <h3 class="text-sm font-mono text-accent uppercase tracking-widest mb-4">
+            Development
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            @for (skill of devSkills; track skill.name) {
+              <span
+                class="px-4 py-2 bg-accent/5 text-accent text-sm font-medium rounded-full border border-accent/10"
+              >
+                {{ skill.name }}
+              </span>
+            }
+          </div>
+        </div>
+
+        <!-- Methodologies -->
+        <div>
+          <h3 class="text-sm font-mono text-accent uppercase tracking-widest mb-4">
+            Methodologies
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            @for (skill of methodologySkills; track skill.name) {
+              <span
+                class="px-4 py-2 bg-accent/5 text-accent text-sm font-medium rounded-full border border-accent/10"
+              >
+                {{ skill.name }}
+              </span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Work Experience Timeline -->
+    <div class="mt-24" appScrollAnimate>
+      <h3 class="text-2xl font-bold text-primary mb-12 text-center">
+        Work Experience
+      </h3>
+      <div class="space-y-8 max-w-3xl mx-auto">
+        @for (exp of experiences; track exp.company) {
+          <div
+            class="bg-surface rounded-2xl p-8 shadow-sm border border-divider hover:shadow-md transition-shadow duration-300"
+          >
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+              <div>
+                <h4 class="text-lg font-semibold text-primary">{{ exp.role }}</h4>
+                <p class="text-accent font-medium">{{ exp.company }}</p>
+              </div>
+              <p class="text-sm text-secondary mt-1 sm:mt-0">
+                {{ exp.period }}
+              </p>
+            </div>
+            <ul class="space-y-2">
+              @for (highlight of exp.highlights; track highlight) {
+                <li class="text-sm text-secondary leading-relaxed flex gap-2">
+                  <span class="text-accent mt-1 shrink-0">&#8226;</span>
+                  <span>{{ highlight }}</span>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

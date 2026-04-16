@@ -1,0 +1,73 @@
+<section id="resume" class="ux-section-shell py-24 md:py-32 px-6 bg-surface">
+  <div class="ux-section-bg ux-bg-resume" aria-hidden="true"></div>
+  <div class="ux-section-inner max-w-4xl mx-auto">
+    <h2
+      appScrollAnimate
+      class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center"
+    >
+      Resume
+    </h2>
+    <p
+      appScrollAnimate
+      class="text-secondary text-center mb-12 max-w-2xl mx-auto"
+    >
+      View or download my full resume below.
+    </p>
+
+    <div appScrollAnimate class="bg-background rounded-2xl border border-divider overflow-hidden">
+      <!-- PDF Embed -->
+      @if (isBrowser) {
+        <div class="w-full" style="height: 600px;">
+          <object
+            [data]="safeResumeUrl"
+            type="application/pdf"
+            class="w-full h-full"
+          >
+            <div class="flex flex-col items-center justify-center h-full gap-4 p-8">
+              <svg
+                class="w-16 h-16 text-secondary/30"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <p class="text-secondary text-center">
+                PDF preview not available in your browser.
+              </p>
+            </div>
+          </object>
+        </div>
+      }
+    </div>
+
+    <!-- Download Button -->
+    <div appScrollAnimate class="text-center mt-8">
+      <a
+        [href]="resumeUrl"
+        download="Senthil-Arunachalam-Resume-2026.pdf"
+        class="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white font-medium rounded-full hover:bg-accent-hover transition-colors duration-200 shadow-sm hover:shadow-md"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+          />
+        </svg>
+        Download Resume
+      </a>
+    </div>
+  </div>
+</section>

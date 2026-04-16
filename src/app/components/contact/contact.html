@@ -1,0 +1,52 @@
+<section id="contact" class="ux-section-shell py-24 md:py-32 px-6 bg-background">
+  <div class="ux-section-bg ux-bg-contact" aria-hidden="true"></div>
+  <div class="ux-section-inner max-w-4xl mx-auto">
+    <h2
+      appScrollAnimate
+      class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center"
+    >
+      Get In Touch
+    </h2>
+    <p
+      appScrollAnimate
+      class="text-secondary text-center mb-16 max-w-2xl mx-auto"
+    >
+      I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+    </p>
+
+    <div appScrollAnimate class="grid sm:grid-cols-3 gap-6">
+      @for (contact of contacts; track contact.type) {
+        <a
+          [href]="contact.href"
+          [target]="contact.type === 'linkedin' ? '_blank' : '_self'"
+          [rel]="contact.type === 'linkedin' ? 'noopener noreferrer' : ''"
+          class="group bg-surface rounded-2xl p-8 border border-divider hover:border-accent/30 hover:shadow-md transition-all duration-300 text-center no-underline"
+        >
+          <div
+            class="w-14 h-14 rounded-full bg-accent/5 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent/10 transition-colors duration-300"
+          >
+            <svg
+              class="w-6 h-6 text-accent"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                [attr.d]="contact.icon"
+              />
+            </svg>
+          </div>
+          <h3 class="text-sm font-mono text-accent uppercase tracking-widest mb-2">
+            {{ contact.label }}
+          </h3>
+          <p class="text-sm text-secondary group-hover:text-primary transition-colors duration-200">
+            {{ contact.value }}
+          </p>
+        </a>
+      }
+    </div>
+  </div>
+</section>

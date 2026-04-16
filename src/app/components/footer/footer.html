@@ -1,0 +1,43 @@
+<footer class="ux-section-shell bg-footer py-12 px-6 relative overflow-hidden">
+  <div class="ux-section-bg ux-bg-footer" aria-hidden="true"></div>
+  <div class="ux-section-inner max-w-6xl mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <!-- Left: Copyright -->
+      <p class="text-sm text-white/60">
+        &copy; {{ currentYear }} {{ profile.name }}. All rights reserved.
+      </p>
+
+      <!-- Center: Social links -->
+      <div class="flex items-center gap-6">
+        @for (contact of contacts; track contact.type) {
+          <a
+            [href]="contact.href"
+            [target]="contact.type === 'linkedin' ? '_blank' : '_self'"
+            [rel]="contact.type === 'linkedin' ? 'noopener noreferrer' : ''"
+            class="text-white/40 hover:text-white transition-colors duration-200"
+            [attr.aria-label]="contact.label"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                [attr.d]="contact.icon"
+              />
+            </svg>
+          </a>
+        }
+      </div>
+
+      <!-- Right: Credit -->
+      <p class="text-sm text-white/60">
+        Designed &amp; Built by {{ profile.name }}
+      </p>
+    </div>
+  </div>
+</footer>

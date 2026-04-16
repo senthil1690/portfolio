@@ -1,0 +1,162 @@
+<section id="case-studies" class="ux-section-shell py-24 md:py-32 px-6 bg-background">
+  <div class="ux-section-bg ux-bg-case-studies" aria-hidden="true"></div>
+  <div class="ux-section-inner max-w-4xl mx-auto">
+    <h2
+      appScrollAnimate
+      class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center"
+    >
+      Case Studies
+    </h2>
+    <p
+      appScrollAnimate
+      class="text-secondary text-center mb-16 max-w-2xl mx-auto"
+    >
+      Deep dives into my design process — from research and wireframes to final deliverables.
+    </p>
+
+    <div class="space-y-6">
+      @for (study of caseStudies; track study.id; let i = $index) {
+        <div
+          [id]="'cs-' + study.projectId"
+          appScrollAnimate
+          [animateDelay]="(i * 100) + 'ms'"
+          class="bg-surface rounded-2xl border border-divider overflow-hidden transition-shadow duration-300 dark:border-accent/15 dark:shadow-black/30"
+          [class.shadow-lg]="isExpanded(study.id)"
+          [class.shadow-sm]="!isExpanded(study.id)"
+        >
+          <!-- Header (always visible) -->
+          <button
+            class="w-full px-8 py-6 flex items-center justify-between cursor-pointer text-left"
+            (click)="toggleStudy(study.id)"
+          >
+            <div>
+              <span class="text-xs font-mono text-accent bg-accent/5 px-3 py-1 rounded-full">
+                {{ study.category }}
+              </span>
+              <h3 class="text-xl font-semibold text-primary mt-3">
+                {{ study.title }}
+              </h3>
+              <p class="text-sm text-secondary mt-1">
+                {{ study.overview }}
+              </p>
+            </div>
+            <svg
+              class="w-5 h-5 text-secondary shrink-0 ml-4 transition-transform duration-300"
+              [class.rotate-180]="isExpanded(study.id)"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Expandable Content -->
+          @if (isExpanded(study.id)) {
+            <div class="px-8 pb-8 border-t border-divider">
+              <!-- Problem -->
+              <div class="mt-8">
+                <h4 class="text-sm font-mono text-accent uppercase tracking-widest mb-3">
+                  Problem
+                </h4>
+                <p class="text-secondary leading-relaxed">
+                  {{ study.problem }}
+                </p>
+              </div>
+
+              <!-- Role & Tools -->
+              <div class="mt-8 grid sm:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="text-sm font-mono text-accent uppercase tracking-widest mb-3">
+                    My Role
+                  </h4>
+                  <p class="text-secondary text-sm leading-relaxed">
+                    {{ study.role }}
+                  </p>
+                </div>
+                <div>
+                  <h4 class="text-sm font-mono text-accent uppercase tracking-widest mb-3">
+                    Tools Used
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    @for (tool of study.tools; track tool) {
+                      <span
+                        class="px-3 py-1 bg-accent/5 text-accent text-xs font-medium rounded-full"
+                      >
+                        {{ tool }}
+                      </span>
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <!-- Design Process -->
+              <div class="mt-8">
+                <h4 class="text-sm font-mono text-accent uppercase tracking-widest mb-3">
+                  Design Process
+                </h4>
+                <div class="space-y-4">
+                  @for (step of study.process; track step; let j = $index) {
+                    <div class="flex gap-4">
+                      <div class="flex flex-col items-center">
+                        <div
+                          class="w-8 h-8 rounded-full bg-accent/10 text-accent text-sm font-semibold flex items-center justify-center shrink-0"
+                        >
+                          {{ j + 1 }}
+                        </div>
+                        @if (j < study.process.length - 1) {
+                          <div class="w-px h-full bg-divider mt-2"></div>
+                        }
+                      </div>
+                      <p class="text-secondary text-sm leading-relaxed pt-1.5">
+                        {{ step }}
+                      </p>
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <!-- Key Screens -->
+              <div class="mt-8">
+                <h4 class="text-sm font-mono text-accent uppercase tracking-widest mb-3">
+                  Key Screens
+                </h4>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  @for (screen of study.screens; track screen; let si = $index) {
+                    <div
+                      class="aspect-video bg-gradient-to-br from-accent/5 to-accent/10 rounded-xl overflow-hidden border border-divider/60"
+                    >
+                      <img
+                        [src]="screenUrl(screen)"
+                        [alt]="study.title + ' — key screen ' + (si + 1)"
+                        class="w-full h-full object-cover object-top"
+                        loading="lazy"
+                        width="640"
+                        height="360"
+                      />
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <!-- Outcome -->
+              <div class="mt-8">
+                <h4 class="text-sm font-mono text-accent uppercase tracking-widest mb-3">
+                  Outcome
+                </h4>
+                <p class="text-secondary leading-relaxed">
+                  {{ study.outcome }}
+                </p>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>

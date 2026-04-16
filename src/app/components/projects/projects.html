@@ -1,0 +1,67 @@
+<section id="projects" class="ux-section-shell py-24 md:py-32 px-6 bg-surface">
+  <div class="ux-section-bg ux-bg-projects" aria-hidden="true"></div>
+  <div class="ux-section-inner max-w-6xl mx-auto">
+    <h2
+      appScrollAnimate
+      class="text-3xl md:text-4xl font-bold text-primary mb-4 text-center"
+    >
+      Projects
+    </h2>
+    <p
+      appScrollAnimate
+      class="text-secondary text-center mb-16 max-w-2xl mx-auto"
+    >
+      A selection of projects showcasing my UI/UX design process and outcomes.
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-8">
+      @for (project of projects; track project.id; let i = $index) {
+        <div
+          appScrollAnimate
+          [animateDelay]="(i * 100) + 'ms'"
+          class="group bg-background rounded-2xl overflow-hidden border border-divider shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-accent/20 dark:shadow-black/40 dark:hover:shadow-accent/15 cursor-pointer"
+          (click)="viewCaseStudy(project)"
+        >
+          <div
+            class="aspect-video bg-gradient-to-br from-accent/5 to-accent/10 overflow-hidden"
+          >
+            <img
+              [src]="thumbnailUrl(project.thumbnail)"
+              [alt]="project.title + ' preview'"
+              class="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+              loading="lazy"
+              width="800"
+              height="450"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="p-6">
+            <div class="flex items-center gap-2 mb-3">
+              <span
+                class="text-xs font-mono text-accent bg-accent/5 px-3 py-1 rounded-full"
+              >
+                {{ project.category }}
+              </span>
+            </div>
+            <h3
+              class="text-xl font-semibold text-primary mb-2 group-hover:text-accent transition-colors duration-200"
+            >
+              {{ project.title }}
+            </h3>
+            <p class="text-sm text-secondary leading-relaxed mb-4">
+              {{ project.description }}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              @for (tag of project.tags; track tag) {
+                <span class="text-xs text-secondary bg-background px-3 py-1 rounded-full border border-divider">
+                  {{ tag }}
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

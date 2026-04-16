@@ -1,0 +1,353 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Semantic palette — toggled via `html.dark` (see ThemeService). */
+:root {
+  --portfolio-bg: #fafaf9;
+  --portfolio-surface: #ffffff;
+  --portfolio-fg: #1a1a1a;
+  --portfolio-muted: #6b7280;
+  --portfolio-accent: #6366f1;
+  --portfolio-accent-hover: #4f46e5;
+  --portfolio-border: #e5e7eb;
+  --portfolio-footer-bg: #18181b;
+  --portfolio-glow: rgba(99, 102, 241, 0.45);
+}
+
+html.dark {
+  --portfolio-bg: #09090b;
+  --portfolio-surface: #141416;
+  --portfolio-fg: #f4f4f5;
+  --portfolio-muted: #a1a1aa;
+  --portfolio-accent: #818cf8;
+  --portfolio-accent-hover: #a5b4fc;
+  --portfolio-border: #27272a;
+  --portfolio-footer-bg: #020203;
+  --portfolio-glow: rgba(129, 140, 248, 0.35);
+}
+
+@theme {
+  --color-background: var(--portfolio-bg);
+  --color-surface: var(--portfolio-surface);
+  --color-primary: var(--portfolio-fg);
+  --color-secondary: var(--portfolio-muted);
+  --color-accent: var(--portfolio-accent);
+  --color-accent-hover: var(--portfolio-accent-hover);
+  --color-divider: var(--portfolio-border);
+  --color-footer: var(--portfolio-footer-bg);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-primary);
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes ux-float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+      opacity: 0.85;
+    }
+    33% {
+      transform: translate(12px, -8px) scale(1.03);
+      opacity: 1;
+    }
+    66% {
+      transform: translate(-8px, 10px) scale(0.98);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes ux-shimmer {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+
+  .ux-animate-orb-tr {
+    animation: ux-float 14s ease-in-out infinite;
+  }
+
+  .ux-animate-orb-bl {
+    animation: ux-float 18s ease-in-out infinite reverse;
+  }
+
+  .ux-animate-shimmer {
+    animation: ux-shimmer 6s ease-in-out infinite;
+  }
+
+  /**
+   * Section backgrounds — UI/UX motifs; intensity rises slightly in dark mode.
+   */
+  .ux-section-shell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ux-section-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .ux-section-inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Hero */
+  .ux-bg-hero {
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -15%, color-mix(in srgb, var(--portfolio-accent) 22%, transparent), transparent 55%),
+      radial-gradient(ellipse 50% 45% at 95% 25%, color-mix(in srgb, var(--portfolio-accent) 16%, transparent), transparent 50%),
+      radial-gradient(ellipse 55% 50% at 5% 75%, color-mix(in srgb, var(--portfolio-accent-hover) 14%, transparent), transparent 50%),
+      linear-gradient(180deg, var(--portfolio-bg) 0%, color-mix(in srgb, var(--portfolio-bg) 92%, var(--portfolio-accent) 8%) 100%);
+  }
+
+  .ux-bg-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--portfolio-accent) 12%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--portfolio-accent) 12%, transparent) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+  }
+
+  html.dark .ux-bg-hero::after {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--portfolio-accent) 18%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--portfolio-accent) 18%, transparent) 1px, transparent 1px);
+  }
+
+  /* About */
+  .ux-bg-about {
+    background:
+      radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--portfolio-accent) 22%, transparent) 1px, transparent 0),
+      radial-gradient(ellipse 100% 80% at 100% 0%, color-mix(in srgb, var(--portfolio-accent) 12%, transparent), transparent 50%),
+      radial-gradient(ellipse 80% 60% at 0% 100%, color-mix(in srgb, var(--portfolio-accent-hover) 10%, transparent), transparent 55%),
+      var(--color-background);
+    background-size:
+      28px 28px,
+      auto,
+      auto,
+      auto;
+  }
+
+  html.dark .ux-bg-about {
+    background:
+      radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--portfolio-accent) 28%, transparent) 1px, transparent 0),
+      radial-gradient(ellipse 100% 80% at 100% 0%, color-mix(in srgb, var(--portfolio-accent) 18%, transparent), transparent 50%),
+      radial-gradient(ellipse 80% 60% at 0% 100%, color-mix(in srgb, var(--portfolio-accent-hover) 14%, transparent), transparent 55%),
+      var(--color-background);
+    background-size:
+      26px 26px,
+      auto,
+      auto,
+      auto;
+  }
+
+  /* Projects */
+  .ux-bg-projects {
+    background:
+      linear-gradient(to right, color-mix(in srgb, var(--portfolio-accent) 10%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--portfolio-accent) 10%, transparent) 1px, transparent 1px),
+      radial-gradient(ellipse 70% 50% at 50% 0%, color-mix(in srgb, var(--portfolio-accent) 14%, transparent), transparent 60%),
+      var(--color-surface);
+    background-size:
+      56px 56px,
+      56px 56px,
+      auto,
+      auto;
+  }
+
+  .ux-bg-projects::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      color-mix(in srgb, var(--portfolio-accent) 8%, transparent) 42%,
+      transparent 72%
+    );
+  }
+
+  html.dark .ux-bg-projects::after {
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      color-mix(in srgb, var(--portfolio-accent) 14%, transparent) 45%,
+      transparent 75%
+    );
+  }
+
+  /* Case studies */
+  .ux-bg-case-studies {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 11px,
+        color-mix(in srgb, var(--portfolio-accent) 14%, transparent) 11px,
+        color-mix(in srgb, var(--portfolio-accent) 14%, transparent) 12px
+      ),
+      radial-gradient(ellipse 85% 55% at 50% 100%, color-mix(in srgb, var(--portfolio-accent) 16%, transparent), transparent 55%),
+      var(--color-background);
+    background-size:
+      120px 2px,
+      auto,
+      auto;
+    background-position:
+      0 42%,
+      center,
+      center;
+    background-repeat:
+      repeat-x,
+      no-repeat,
+      no-repeat;
+  }
+
+  html.dark .ux-bg-case-studies {
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 11px,
+        color-mix(in srgb, var(--portfolio-accent) 22%, transparent) 11px,
+        color-mix(in srgb, var(--portfolio-accent) 22%, transparent) 12px
+      ),
+      radial-gradient(ellipse 85% 55% at 50% 100%, color-mix(in srgb, var(--portfolio-accent) 22%, transparent), transparent 55%),
+      var(--color-background);
+    background-size:
+      120px 2px,
+      auto,
+      auto;
+    background-position:
+      0 42%,
+      center,
+      center;
+    background-repeat:
+      repeat-x,
+      no-repeat,
+      no-repeat;
+  }
+
+  /* Resume */
+  .ux-bg-resume {
+    background:
+      repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        color-mix(in srgb, var(--portfolio-accent) 12%, transparent) 31px,
+        color-mix(in srgb, var(--portfolio-accent) 12%, transparent) 32px
+      ),
+      linear-gradient(to right, color-mix(in srgb, var(--portfolio-accent) 10%, transparent), transparent 12%),
+      radial-gradient(ellipse 80% 45% at 50% 0%, color-mix(in srgb, var(--portfolio-accent) 12%, transparent), transparent 55%),
+      var(--color-surface);
+  }
+
+  /* Contact */
+  .ux-bg-contact {
+    background:
+      radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--portfolio-accent) 20%, transparent) 1px, transparent 0),
+      radial-gradient(ellipse 60% 55% at 15% 85%, color-mix(in srgb, var(--portfolio-accent) 18%, transparent), transparent 55%),
+      radial-gradient(ellipse 55% 50% at 90% 15%, color-mix(in srgb, var(--portfolio-accent-hover) 16%, transparent), transparent 50%),
+      var(--color-background);
+    background-size:
+      32px 32px,
+      auto,
+      auto,
+      auto;
+  }
+
+  .ux-bg-contact::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(
+      165deg,
+      transparent 0%,
+      color-mix(in srgb, var(--portfolio-accent) 10%, transparent) 45%,
+      transparent 75%
+    );
+  }
+
+  html.dark .ux-bg-contact::after {
+    background-image: linear-gradient(
+      165deg,
+      transparent 0%,
+      color-mix(in srgb, var(--portfolio-accent) 16%, transparent) 48%,
+      transparent 78%
+    );
+  }
+
+  /* Footer — always on dedicated footer ink */
+  .ux-bg-footer {
+    background:
+      repeating-linear-gradient(
+        -28deg,
+        transparent,
+        transparent 13px,
+        rgba(255, 255, 255, 0.04) 13px,
+        rgba(255, 255, 255, 0.04) 14px
+      ),
+      radial-gradient(ellipse 80% 80% at 50% 120%, color-mix(in srgb, var(--portfolio-accent) 28%, transparent), transparent 55%),
+      var(--color-footer);
+  }
+
+  html.dark .ux-bg-footer {
+    background:
+      repeating-linear-gradient(
+        -28deg,
+        transparent,
+        transparent 13px,
+        rgba(255, 255, 255, 0.035) 13px,
+        rgba(255, 255, 255, 0.035) 14px
+      ),
+      radial-gradient(ellipse 80% 80% at 50% 120%, color-mix(in srgb, var(--portfolio-accent) 35%, transparent), transparent 55%),
+      var(--color-footer);
+  }
+}
